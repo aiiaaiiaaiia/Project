@@ -1,3 +1,3 @@
 def generate_text():
-    text = 'i got this'
+    text = 'This is from displaytext python module.'
     return text

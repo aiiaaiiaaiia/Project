@@ -1,1 +1,1 @@
-from pythonmodule import link
+from pythonmodule import displaytext
