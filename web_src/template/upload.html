@@ -16,35 +16,32 @@
                 <!-- <div class="container" style="margin: 0px; margin-right: 0px; padding: 0px; height: auto; width: auto;"> -->
                 <div className="row" style="height: 270px; width: auto;" > 
 
-                    <div class="col-sm-6 float-left" style="margin: 0px; padding: 0px;  height: auto; "> 
+                    <div class="col-sm-4 float-left" style="margin: 0px; padding: 0px;  height: auto; "> 
                         <div class="card" style="width: 20rem; margin-bottom: 2rem; margin-left: 8rem; background-color: honeydew; border-radius: 20px;" >
                             <div class="card-body" style="padding: 2%; ">
                                 <p style="margin: 0%; padding-left: 10px; ">HI! </br>let's import your video or Youtube link </br>then choose the languages.</p>
                             </div>
                         </div>
-                        <a class="btn btn-primary btn-lg" href="#" role="button" style="margin-bottom: 15px; padding: 5px; font-size: 1rem; margin-right: 10px;">Upload video</a>
-                        <a class="btn btn-primary btn-lg" href="#" role="button" style="margin-bottom: 15px; padding: 5px; font-size: 1rem;">Youtube link</a>
+                        <a class="btn btn-primary btn-lg" href="#" role="button" style="margin-bottom: 3%; padding: 1%; font-size: 1rem; margin-right: 10px;">Upload video</a>
+                        <a class="btn btn-primary btn-lg" href="#" role="button" style="margin-bottom: 3%; padding: 1%; font-size: 1rem;">Youtube link</a>
                         <form method=post enctype=multipart/form-data >
                             <input type=file name=file>
-                            <button type="submit" class="btn btn-success" style=" font-size: 1rem; padding: 4px;">Upload</button>
+                            <button  type="submit" class="btn btn-success"  style=" font-size: 1rem; padding: 1.4%;" >Upload</button>
                         </form>
-
                     </div>
  
                     <div class="col-sm-2 float-right" style="margin: 0px; padding: 0px;  height: auto;">
                         <div class="card text-center" style="height: 260px; border-radius: 1rem;">
                             <div class="card-body">
-                                <h5 style="margin-bottom: 32px;">Translation language</h5>
-                                    <div class="btn-group-vertical ">
-                                        <button type="button" class="btn btn-outline-success" style="margin-bottom: 18px;">Thai</button>
-                                        <p class="text-center" style="margin-bottom: 18px; padding-left: 28px;">or</p>
-                                        <button type="button" class="btn btn-outline-success">English</button> 
-                                    </div>
+                                <h5 style="margin-bottom: 30%;">Process </br>the video</h5>
+                                <div class="col align-self-center" style="padding: 0%; align-items: center;">
+                                    <button id="submitBtn" type="submit" class="btn btn-success btn-lg monitored-btn" disabled>Submit</button>
+                                </div>                    
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-sm-4 float-left" style="margin: 0px; padding-right: 2%;  height: auto; ">
+                    <div class="col-sm-4 float-left" style="margin: 0px; padding-right: 1%;  height: auto; ">
                         <div class="card text-center" style="height: 260px; border-radius: 1rem;" >
                             <div class="card-body">
                                 <h5 style="margin-bottom: 30%px;">Choose the text languages</h5>
@@ -59,7 +56,7 @@
                                
                                 <div class="row" style="padding-bottom: 2%; height: 18%; margin-bottom: 2%;">
                                     <div class="items col-sm-4 d-flex justify-content-center" style="padding-right: 4%; padding-left: 3%;" >
-                                        <div data-toggle="buttons" class="btn-group bizmoduleselect" style="width: 100%;" >
+                                        <div data-toggle="buttopns" class="btn-group bizmoduleselect" style="width: 100%;" >
                                             <label class="btn btn-outline-info" style="border-radius: 2.4rem; padding: 0px;  margin-bottom: 0px;">
                                             <p style="margin: 0%; width: 100%;">Chinese</p>
                                             </label>
@@ -131,6 +128,19 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-sm-2 float-right" style="margin: 0px; padding: 0px;  height: auto; padding-right: 1%;">
+                        <div class="card text-center" style="height: 260px; border-radius: 1rem;">
+                            <div class="card-body">
+                                <h5 style="margin-bottom: 32px;">Translation language</h5>
+                                    <div class="btn-group-vertical ">
+                                        <button type="button" class="btn btn-outline-success" style="margin-bottom: 18px;">Thai</button>
+                                        <p class="text-center" style="margin-bottom: 18px; padding-left: 28px;">or</p>
+                                        <button type="button" class="btn btn-outline-success">English</button> 
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- </div> -->
 
@@ -150,9 +160,10 @@
                         </div>
                         <div class class="card text-center" style="height:90%; border-radius: 0rem; background-color: white; border-bottom: 0.5px solid black; border-left: 0.5px solid black; border-right: 0.5px solid black;">
                             <div class="card-body">
-                                <h5>Video : {{file_name}}</h5>
-                                <h5>From : {{inputlang}}</h5>
-                                <h5>Translate to : {{trantolang}}</h5>
+                                <h5 style="font-size: medium;">Input Video : <span id = 'file_name'></span></h5>
+                                <h5 style="font-size: medium;">From : {{inputlang}}</h5>
+                                <h5 style="font-size: medium;">Translate to : {{trantolang}}</h5>
+                                <h5 style="font-size: medium;">Button Pressed: {{autodetect}} </h5>
                             </div>
                         </div>
                     </div>
@@ -166,7 +177,7 @@
     </div>            
 
     
-
+    <script type="text/javascript" src="submit_video.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>

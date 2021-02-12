@@ -1,5 +1,5 @@
 import os
-from flask import Flask, flash, request, redirect, url_for, render_template
+from flask import Flask, flash, request, redirect, url_for, render_template, jsonify
 from werkzeug.utils import secure_filename
 from flask import send_from_directory
 import importpythonmodule
@@ -15,12 +15,24 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+@app.route('/vdo_info',methods = ['GET'])
+def vdo_info_handle():
+    global file_name
+    res = {'file_name': file_name}
+    return jsonify(res)
+
 @app.route('/videofromupload', methods=['GET', 'POST'])     
 def upload_file():
+    global file_name
+    global auto_detect
     file_name = 'None'
-    inputlang = None
-    trantolang = None
+    inputlang = 'None'
+    trantolang = 'None'
+
     text = importpythonmodule.displaytext.generate_text()
+    # if request.method == "GET":
+    #     autodetect = 'autodetect'
+    #     return redirect(request.url)
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
@@ -40,25 +52,12 @@ def upload_file():
             file_name = file.filename
             # return redirect(url_for('uploaded_file', filename=filename))
     return render_template('upload.html', processed_video = url_for('static', filename="uploadedvideo/"+file_name)
-                            , echo_text = text, file_name = file_name, inputlang = inputlang, trantolang = trantolang)
-
-# @app.route('/videofromupload/<filename>')
-# def uploaded_file(filename):
-#     return send_from_directory(app.config['UPLOAD_FOLDER'],filename)
+                            , echo_text = text, file_name = file_name, inputlang = inputlang, trantolang = trantolang
+                            )
 
 # @app.route('/videofromlink', methods=['GET', 'POST'])
 # def home():
 #     return render_template("link.html")
-
-# @app.route('/videofromupload/display/<filename>')
-# def display_video(filename):
-# 	print('display_video filename: ' + filename)
-# 	return redirect(url_for('uploadedvideo', filename= filename), code=301)
-
-# @app.route('/videofromupload/display/<filename>'  #, methods=['GET', 'POST'])
-# def video_generated():
-#     return Response(generate())
-
 
 if __name__=="__main__":
     app.run(host='localhost', port=5000, debug=True)
