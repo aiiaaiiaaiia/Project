@@ -26,7 +26,7 @@
                         <a class="btn btn-primary btn-lg" href="#" role="button" style="margin-bottom: 3%; padding: 1%; font-size: 1rem;">Youtube link</a>
                         <form method=post enctype=multipart/form-data >
                             <input type=file name=file>
-                            <button  type="submit" class="btn btn-success"  style=" font-size: 1rem; padding: 1.4%;" >Upload</button>
+                            <button  type="submit" class="btn btn-success"  style=" font-size: 1rem; padding: 1.4%;" id='button_upload' >Upload</button>
                         </form>
                     </div>
  
@@ -34,21 +34,33 @@
                         <div class="card text-center" style="height: 260px; border-radius: 1rem;">
                             <div class="card-body">
                                 <h5 style="margin-bottom: 30%;">Process </br>the video</h5>
-                                <div class="col align-self-center" style="padding: 0%; align-items: center;">
-                                    <button id="submitBtn" type="submit" class="btn btn-success btn-lg monitored-btn" disabled>Submit</button>
+                                <div class="col align-self-center" style="padding: 0%; align-items: center;" id='button_submit' type='button' >
+                                    <button id="submitBtn" type="submit" class="btn btn-success btn-lg monitored-btn" onclick="submit()" disabled>Submit</button>
                                 </div>                    
                             </div>
                         </div>
                     </div>
 
+                    <script>
+                        var chinese_value = false;
+                        var german_value = false;
+                        var english_value = false;
+                        var french_value = false;
+                        var italian_value = false;
+                        var japanese_value = false;
+                        var korean_value = false;
+                        var spanish_value = false;
+                        var thai_value = false;
+                        var tranlang = false;
+                    </script>
                     <div class="col-sm-4 float-left" style="margin: 0px; padding-right: 1%;  height: auto; ">
                         <div class="card text-center" style="height: 260px; border-radius: 1rem;" >
                             <div class="card-body">
                                 <h5 style="margin-bottom: 30%px;">Choose the text languages</h5>
 
                                 <div class="row justify-content-center" style="padding-bottom: 2%; margin-bottom: 2%; margin-top: 5%;">
-                                    <div data-toggle="buttons" class="btn-group bizmoduleselect"  >
-                                        <label class="btn btn-outline-info" style="border-radius: 0.4rem; padding: 0px;  margin-bottom: 0px; ">
+                                    <div data-toggle="buttons" class="btn-group bizmoduleselect" id='button_autodetect' type='button' onchange="autodetect()">
+                                        <label class="btn btn-outline-info" style="border-radius: 0.4rem; padding: 0px;  margin-bottom: 0px;">
                                         <p style="margin: 5px; width: 120px;">Auto Detect</p>
                                         </label>
                                     </div>
@@ -56,21 +68,39 @@
                                
                                 <div class="row" style="padding-bottom: 2%; height: 18%; margin-bottom: 2%;">
                                     <div class="items col-sm-4 d-flex justify-content-center" style="padding-right: 4%; padding-left: 3%;" >
-                                        <div data-toggle="buttopns" class="btn-group bizmoduleselect" style="width: 100%;" >
+                                        <div data-toggle="buttons" class="btn-group bizmoduleselect" style="width: 100%;" id='button_chinese' type='button' onclick="chinese()">
+                                            <script>
+                                                function chinese(){
+                                                    chinese_value = !chinese_value
+                                                    // console.log(chinese_value)
+                                                }
+                                            </script>
                                             <label class="btn btn-outline-info" style="border-radius: 2.4rem; padding: 0px;  margin-bottom: 0px;">
                                             <p style="margin: 0%; width: 100%;">Chinese</p>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="items col-sm-4 d-flex justify-content-center" style="padding-right: 4%; padding-left: 3%;" >
-                                        <div data-toggle="buttons" class="btn-group bizmoduleselect" style="width: 100%;" >
+                                        <div data-toggle="buttons" class="btn-group bizmoduleselect" style="width: 100%;" id='button_german' type='button' onclick="german()">
+                                            <script>
+                                                function german(){
+                                                    german_value = !german_value
+                                                    // console.log(german_value)
+                                                }
+                                            </script>
                                             <label class="btn btn-outline-info" style="border-radius: 2.4rem; padding: 0px;  margin-bottom: 0px;">
                                             <p style="margin: 0%; width: 100%;">German</p>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="items col-sm-4 d-flex justify-content-center" style="padding-right: 4%; padding-left: 3%;" >
-                                        <div data-toggle="buttons" class="btn-group bizmoduleselect" style="width: 100%;" >
+                                        <div data-toggle="buttons" class="btn-group bizmoduleselect" style="width: 100%;" id='button_english' type='button' onclick="english()">
+                                            <script>
+                                                function english(){
+                                                    english_value = !english_value
+                                                    // console.log(english_value)
+                                                }
+                                            </script>
                                             <label class="btn btn-outline-info" style="border-radius: 2.4rem; padding: 0px;  margin-bottom: 0px;">
                                                 <p style="margin: 0%; width: 100%;">English</p>
                                             </label>
@@ -80,21 +110,39 @@
 
                                 <div class="row" style="padding-bottom: 2%; height: 18%; margin-bottom: 2%;">
                                     <div class="items col-sm-4 d-flex justify-content-center" style="padding-right: 4%; padding-left: 3%;" >
-                                        <div data-toggle="buttons" class="btn-group bizmoduleselect" style="width: 100%;" >
+                                        <div data-toggle="buttons" class="btn-group bizmoduleselect" style="width: 100%;" id='button_french' type='button' onclick="french()" >
+                                            <script>
+                                                function french(){
+                                                    french_value = !french_value
+                                                    // console.log(french_value)
+                                                }
+                                            </script>
                                             <label class="btn btn-outline-info" style="border-radius: 2.4rem; padding: 0px;  margin-bottom: 0px;">
                                             <p style="margin: 0%; width: 100%;">French</p>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="items col-sm-4 d-flex justify-content-center" style="padding-right: 4%; padding-left: 3%;" >
-                                        <div data-toggle="buttons" class="btn-group bizmoduleselect" style="width: 100%;">
+                                        <div data-toggle="buttons" class="btn-group bizmoduleselect" style="width: 100%;" id='button_italian' type='button' onclick="italian()">
+                                            <script>
+                                                function italian(){
+                                                    italian_value = !italian_value
+                                                    // console.log(italian_value)
+                                                }
+                                            </script>
                                             <label class="btn btn-outline-info" style="border-radius: 2.4rem; padding: 0px;  margin-bottom: 0px;">
                                             <p style="margin: 0%; width: 100%;">Italian</p>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="items col-sm-4 d-flex justify-content-center" style="padding-right: 4%; padding-left: 3%;" >
-                                        <div data-toggle="buttons" class="btn-group bizmoduleselect" style="width: 100%;">
+                                        <div data-toggle="buttons" class="btn-group bizmoduleselect" style="width: 100%;" id='button_japanese' type='button' onclick="japanese()">
+                                            <script>
+                                                function japanese(){
+                                                    japanese_value = !japanese_value
+                                                    // console.log(japanese_value)
+                                                }
+                                            </script>
                                             <label class="btn btn-outline-info" style="border-radius: 2.4rem; padding: 0px;  margin-bottom: 0px;">
                                             <p style="margin: 0%; width: 100%;">Japanese</p>
                                             </label>
@@ -104,21 +152,39 @@
 
                                 <div class="row" style="padding-bottom: 2%; height: 18%; margin-bottom: 2%;">
                                     <div class="items col-sm-4 d-flex justify-content-center" style="padding-right: 4%; padding-left: 3%;" >
-                                        <div data-toggle="buttons" class="btn-group bizmoduleselect" style="width: 100%;" >
+                                        <div data-toggle="buttons" class="btn-group bizmoduleselect" style="width: 100%;" id='button_korean' type='button' onclick="korean()">
+                                            <script>
+                                                function korean(){
+                                                    korean_value = !korean_value
+                                                    // console.log(korean_value)
+                                                }
+                                            </script>
                                             <label class="btn btn-outline-info" style="border-radius: 2.4rem; padding: 0px;  margin-bottom: 0px;">
                                             <p style="margin: 0%; width: 100%;">Korean</p>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="items col-sm-4 d-flex justify-content-center" style="padding-right: 4%; padding-left: 3%;" >
-                                        <div data-toggle="buttons" class="btn-group bizmoduleselect" style="width: 100%;">
+                                        <div data-toggle="buttons" class="btn-group bizmoduleselect" style="width: 100%;" id='button_spanish' type='button' onclick="spanish()">
+                                            <script>
+                                                function spanish(){
+                                                    spanish_value = !spanish_value
+                                                    // console.log(spanish_value)
+                                                }
+                                            </script>
                                             <label class="btn btn-outline-info" style="border-radius: 2.4rem; padding: 0px;  margin-bottom: 0px;">
                                             <p style="margin: 0%; width: 100%;">Spanish</p>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="items col-sm-4 d-flex justify-content-center" style="padding-right: 4%; padding-left: 3%;" >
-                                        <div data-toggle="buttons" class="btn-group bizmoduleselect" style="width: 100%;">
+                                        <div data-toggle="buttons" class="btn-group bizmoduleselect" style="width: 100%;" id='button_thai' type='button' onclick="thai()">
+                                            <script>
+                                                function thai(){
+                                                    thai_value = !thai_value
+                                                    // console.log(thai_value)
+                                                }
+                                            </script>
                                             <label class="btn btn-outline-info" style="border-radius: 2.4rem; padding: 0px;  margin-bottom: 0px;">
                                             <p style="margin: 0%; width: 100%;">Thai</p>
                                             </label>
@@ -129,14 +195,84 @@
                         </div>
                     </div>
 
+                    <script>
+                        var inputlang = '';
+                        function submit(){
+                            if(chinese_value){
+                                inputlang = inputlang.concat('Chinese ');
+                            }
+                            if(german_value){
+                                inputlang = inputlang.concat('German ');
+                            }
+                            if(english_value){
+                                inputlang = inputlang.concat('English ');
+                            }
+                            if(french_value){
+                                inputlang = inputlang.concat('French ');
+                            }
+                            if(italian_value){
+                                inputlang = inputlang.concat('Italian ');
+                            }
+                            if(japanese_value){
+                                inputlang = inputlang.concat('Japanese ');
+                            }
+                            if(korean_value){
+                                inputlang = inputlang.concat('Korean ');
+                            }
+                            if(spanish_value){
+                                inputlang = inputlang.concat('Spanish ');
+                            }
+                            if(thai_value){
+                                inputlang = inputlang.concat('Thai ');
+                            }
+                            if(inputlang == ''){
+                                inputlang = 'Auto detect the language (Default)'
+                            }
+                            if(tranlang == false){
+                                tranlang = 'English (Default)'
+                            }
+                            console.log(inputlang)
+                            document.getElementById("from_lang").innerHTML = inputlang;
+                            document.getElementById("tran_to_lang").innerHTML = tranlang;
+                            document.getElementById("button_autodetect").disabled = true;
+                            document.getElementById("button_chinese").disabled = true;
+                            document.getElementById("button_german").disabled = true;
+                            document.getElementById("button_english").disabled = true;
+                            document.getElementById("button_french").disabled = true;
+                            document.getElementById("button_italian").disabled = true;
+                            document.getElementById("button_japanese").disabled = true;
+                            document.getElementById("button_korean").disabled = true;
+                            document.getElementById("button_spanish").disabled = true;
+                            document.getElementById("button_thai").disabled = true; 
+                            document.getElementById("submitBtn").disabled = true; 
+                            document.getElementById("button_upload").disabled = true;
+                            document.getElementById("tran_to_thai").disabled = true;
+                            document.getElementById("tran_to_english").disabled = true;
+
+                            // languages = {
+                            //     'from': inputlang,
+                            //     'to': tranlang
+                            // }
+                        }
+                    </script>
+                
+
                     <div class="col-sm-2 float-right" style="margin: 0px; padding: 0px;  height: auto; padding-right: 1%;">
                         <div class="card text-center" style="height: 260px; border-radius: 1rem;">
                             <div class="card-body">
                                 <h5 style="margin-bottom: 32px;">Translation language</h5>
                                     <div class="btn-group-vertical ">
-                                        <button type="button" class="btn btn-outline-success" style="margin-bottom: 18px;">Thai</button>
+                                        <button type="button" class="btn btn-outline-success" style="margin-bottom: 18px;" id='button_tran_thai' onclick="tran_to_thai()">Thai</button>
                                         <p class="text-center" style="margin-bottom: 18px; padding-left: 28px;">or</p>
-                                        <button type="button" class="btn btn-outline-success">English</button> 
+                                        <button type="button" class="btn btn-outline-success" id='button_tran_english' onclick="tran_to_english()">English</button> 
+                                        <script>
+                                            function tran_to_thai(){
+                                                tranlang = 'Thai'
+                                            }
+                                            function tran_to_english(){
+                                                tranlang = 'English'
+                                            }
+                                        </script>
                                     </div>
                             </div>
                         </div>
@@ -161,9 +297,8 @@
                         <div class class="card text-center" style="height:90%; border-radius: 0rem; background-color: white; border-bottom: 0.5px solid black; border-left: 0.5px solid black; border-right: 0.5px solid black;">
                             <div class="card-body">
                                 <h5 style="font-size: medium;">Input Video : <span id = 'file_name'></span></h5>
-                                <h5 style="font-size: medium;">From : {{inputlang}}</h5>
-                                <h5 style="font-size: medium;">Translate to : {{trantolang}}</h5>
-                                <h5 style="font-size: medium;">Button Pressed: {{autodetect}} </h5>
+                                <h5 style="font-size: medium;">From : <span id = 'from_lang'></span></h5>
+                                <h5 style="font-size: medium;">Translate to : <span id = 'tran_to_lang'></h5>
                             </div>
                         </div>
                     </div>

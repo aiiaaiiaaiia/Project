@@ -7,6 +7,8 @@ fetch('/vdo_info', {
     nameofvideo = data.file_name
     document.getElementById("file_name").innerHTML = nameofvideo;
     console.log(data.file_name)
+    console.log(inputlang)
+    console.log(tranlang)
     if (data.file_name != 'None'){
         document.getElementById('submitBtn').disabled = false;
     }

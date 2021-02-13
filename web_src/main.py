@@ -21,13 +21,20 @@ def vdo_info_handle():
     res = {'file_name': file_name}
     return jsonify(res)
 
+# @app.route('/button', methods=['POST'])
+# def button():
+#     global inputlang
+#     global tranlang
+#     inputlang = request.json['from']
+#     tranlang = request.json['to']
+#     return jsonify(result=...)
+
 @app.route('/videofromupload', methods=['GET', 'POST'])     
 def upload_file():
     global file_name
-    global auto_detect
+    global inputlang
     file_name = 'None'
-    inputlang = 'None'
-    trantolang = 'None'
+    # inputlang = ''
 
     text = importpythonmodule.displaytext.generate_text()
     # if request.method == "GET":
@@ -52,8 +59,7 @@ def upload_file():
             file_name = file.filename
             # return redirect(url_for('uploaded_file', filename=filename))
     return render_template('upload.html', processed_video = url_for('static', filename="uploadedvideo/"+file_name)
-                            , echo_text = text, file_name = file_name, inputlang = inputlang, trantolang = trantolang
-                            )
+                            , echo_text = text)
 
 # @app.route('/videofromlink', methods=['GET', 'POST'])
 # def home():
