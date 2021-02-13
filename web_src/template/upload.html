@@ -6,56 +6,82 @@
 
 </head>
 <body>
+    <script>
+        var chinese_value = false;
+        var german_value = false;
+        var english_value = false;
+        var french_value = false;
+        var italian_value = false;
+        var japanese_value = false;
+        var korean_value = false;
+        var spanish_value = false;
+        var thai_value = false;
+        var tranlang = false;
+    </script>
     <div class="card" style="background-color: rgb(252,202,202); padding: 1.25rem; ">      
         <div class="card-body">
-            <div class="jumbotron" style="background-color: white; padding: 34px; height: 1150px; border-radius: 3rem;  border: 1px solid black;">
+            <div class="jumbotron" style="background-color: white; padding: 2%; height: 1200px; border-radius: 3rem;  border: 1px solid rgba(0, 0, 0, 0.3);">
                 <h1 class="display-4">Automatic Text Recognition and Translation </br>for Real-time Digital Video </h1>
                 <p class="lead">This project will help you understand and enjoy your video better!</p>
                 <hr class="my-4" style="padding-bottom: 0.8rem; padding-top: 0.5rem;">
                
                 <!-- <div class="container" style="margin: 0px; margin-right: 0px; padding: 0px; height: auto; width: auto;"> -->
-                <div className="row" style="height: 270px; width: auto;" > 
+                <div className="row" style="height: 310px; width: auto; margin-bottom: 0.8rem;" > 
 
-                    <div class="col-sm-4 float-left" style="margin: 0px; padding: 0px;  height: auto; "> 
+                    <div class="col-sm-4 float-left" style="margin: 0px; padding: 0px;  height: 100%; "> 
                         <div class="card" style="width: 20rem; margin-bottom: 2rem; margin-left: 8rem; background-color: honeydew; border-radius: 20px;" >
                             <div class="card-body" style="padding: 2%; ">
                                 <p style="margin: 0%; padding-left: 10px; ">HI! </br>let's import your video or Youtube link </br>then choose the languages.</p>
                             </div>
                         </div>
-                        <a class="btn btn-primary btn-lg" href="#" role="button" style="margin-bottom: 3%; padding: 1%; font-size: 1rem; margin-right: 10px;">Upload video</a>
+                        <a class="btn btn-primary btn-lg" href="#" role="button" style="margin-bottom: 3%; padding: 1%; font-size: 1rem; margin-right: 2%;">Upload video</a>
                         <a class="btn btn-primary btn-lg" href="#" role="button" style="margin-bottom: 3%; padding: 1%; font-size: 1rem;">Youtube link</a>
                         <form method=post enctype=multipart/form-data >
                             <input type=file name=file>
                             <button  type="submit" class="btn btn-success"  style=" font-size: 1rem; padding: 1.4%;" id='button_upload' >Upload</button>
                         </form>
+                        <div class="card text-center" style="width: 100%; background-color: white; border-radius: 20px; margin-top: 6%; border: 0.5px solid rgba(0, 0, 0, 0.3);" >
+                            <div class="card-body" style="padding: 3%; ">
+                                <h5 style="margin-bottom: 30%px;">Choose the text position</h5>
+                                <div class="col-sm-4 float-left" style="padding-right: 0%; padding-left: 0%;">
+                                    <INPUT TYPE="Radio" Name="Gender" Value="Above Text"> Above Text
+                                </div>
+                                <div class="col-sm-4 float-left" style="padding-right: 0%; padding-left: 0%;">
+                                    <INPUT TYPE="Radio" Name="Gender" Value="Under Text" > Under Text
+                                </div>
+                                <div class="col-sm-4 float-left" style="padding-right: 0%; padding-left: 0%;">
+                                    <INPUT TYPE="Radio" Name="Gender" Value="At Text Position"> Text Position
+                                </div>
+                                <!-- <script>
+                                    console.log()
+                                </script> -->
+                            </div>
+                        </div>
                     </div>
  
-                    <div class="col-sm-2 float-right" style="margin: 0px; padding: 0px;  height: auto;">
-                        <div class="card text-center" style="height: 260px; border-radius: 1rem;">
+                    <div class="col-sm-2 float-right" style="margin: 0px; padding: 0px;  height: 100%;">
+                        <div class="card text-center" style="height: 48%; border-radius: 1rem; border: 0.5px solid rgba(0, 0, 0, 0.3);">
                             <div class="card-body">
-                                <h5 style="margin-bottom: 30%;">Process </br>the video</h5>
-                                <div class="col align-self-center" style="padding: 0%; align-items: center;" id='button_submit' type='button' >
+                                <h5 style="margin-bottom: 0%;">Process</br>the video</h5>
+                                <div class="col align-self-center" style="padding: 0%; align-items: center; margin-top: 7%;" id='button_submit' type='button' >
                                     <button id="submitBtn" type="submit" class="btn btn-success btn-lg monitored-btn" onclick="submit()" disabled>Submit</button>
+                                </div>                    
+                            </div>
+                        </div>
+                        <div class="card text-center" style="height: 48%; margin-top: 4%; border-radius: 1rem; border: 0.5px solid rgba(0, 0, 0, 0.3);">
+                            <div class="card-body">
+                                <h5 style="margin-bottom: 0%;">Reset</br>the process</h5>
+                                <div class="col align-self-center" style="padding: 0%; align-items: center; margin-top: 7%;" id='button_submit' type='button' >
+                                    <button id="resetBtn" type="submit" class="btn btn-danger btn-lg monitored-btn" onclick="reset()" >Reset</button>
                                 </div>                    
                             </div>
                         </div>
                     </div>
 
-                    <script>
-                        var chinese_value = false;
-                        var german_value = false;
-                        var english_value = false;
-                        var french_value = false;
-                        var italian_value = false;
-                        var japanese_value = false;
-                        var korean_value = false;
-                        var spanish_value = false;
-                        var thai_value = false;
-                        var tranlang = false;
-                    </script>
-                    <div class="col-sm-4 float-left" style="margin: 0px; padding-right: 1%;  height: auto; ">
-                        <div class="card text-center" style="height: 260px; border-radius: 1rem;" >
-                            <div class="card-body">
+                    
+                    <div class="col-sm-4 float-left" style="margin: 0px; padding-right: 1%;  height: 100%; ">
+                        <div class="card text-center" style="height: 100%; border-radius: 1rem; border: 0.5px solid rgba(0, 0, 0, 0.3);" >
+                            <div class="card-body" style="height: 100%;">
                                 <h5 style="margin-bottom: 30%px;">Choose the text languages</h5>
 
                                 <div class="row justify-content-center" style="padding-bottom: 2%; margin-bottom: 2%; margin-top: 5%;">
@@ -80,7 +106,7 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="items col-sm-4 d-flex justify-content-center" style="padding-right: 4%; padding-left: 3%;" >
+                                    <div class="items col-sm-4 d-flex justify-content-center " style="padding-right: 4%; padding-left: 3%;" >
                                         <div data-toggle="buttons" class="btn-group bizmoduleselect" style="width: 100%;" id='button_german' type='button' onclick="german()">
                                             <script>
                                                 function german(){
@@ -88,7 +114,7 @@
                                                     // console.log(german_value)
                                                 }
                                             </script>
-                                            <label class="btn btn-outline-info" style="border-radius: 2.4rem; padding: 0px;  margin-bottom: 0px;">
+                                            <label class="btn btn-outline-info " style="border-radius: 2.4rem; padding: 0px;  margin-bottom: 0px;">
                                             <p style="margin: 0%; width: 100%;">German</p>
                                             </label>
                                         </div>
@@ -257,8 +283,8 @@
                     </script>
                 
 
-                    <div class="col-sm-2 float-right" style="margin: 0px; padding: 0px;  height: auto; padding-right: 1%;">
-                        <div class="card text-center" style="height: 260px; border-radius: 1rem;">
+                    <div class="col-sm-2 float-right" style="margin: 0px; padding: 0px;  height: 100%; padding-right: 1%;">
+                        <div class="card text-center" style="height: 100%; border-radius: 1rem; border: 0.5px solid rgba(0, 0, 0, 0.3);">
                             <div class="card-body">
                                 <h5 style="margin-bottom: 32px;">Translation language</h5>
                                     <div class="btn-group-vertical ">
@@ -299,6 +325,7 @@
                                 <h5 style="font-size: medium;">Input Video : <span id = 'file_name'></span></h5>
                                 <h5 style="font-size: medium;">From : <span id = 'from_lang'></span></h5>
                                 <h5 style="font-size: medium;">Translate to : <span id = 'tran_to_lang'></h5>
+                                <h5 style="font-size: medium;">Text position : <span id = 'text_position'></h5>
                             </div>
                         </div>
                     </div>
