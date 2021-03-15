@@ -1,0 +1,27 @@
+{% extends "upload.html" %}
+{% block vdo_render %}
+<!doctype html>
+<div className="row" style="padding-top: 30px; padding-right: 0px; height: 500px; width: auto;"> 
+    <div class="col-7 float-left " style="margin: 0px; padding: 0px; align-self: center; height: 500px;">
+        <video width="98%" height="100%"  controls style="background-color: antiquewhite; align-items: center;  border: 0.5px solid black;">  
+            <source src={{ processed_video }} type="video/mp4">
+        </video>
+    </div>
+
+    <div class="col-5 float-right" style="margin: 0px; padding: 0px;  height: 500px; ">
+        <div class class="card text-center" style="height:10%; border-top-right-radius: 1rem; border-top-left-radius: 1rem; background-color: white; border: 0.5px solid black;">
+            <div class="card-body" style=" padding: 0px; ">
+                <h5 style="text-align: center; margin-bottom: 0px; padding-top: 12px; ">TEXT FROM YOUR VIDEO!</h5>
+            </div>
+        </div>
+        <div class class="card text-center" style="height:90%; border-radius: 0rem; background-color: white; border-bottom: 0.5px solid black; border-left: 0.5px solid black; border-right: 0.5px solid black;">
+            <div class="card-body">
+                <h5 style="font-size: medium;">Input Video : <span id = 'file_name'></span></h5>
+                <h5 style="font-size: medium;">From : <span id = 'from_lang'></span></h5>
+                <h5 style="font-size: medium;">Translate to : <span id = 'tran_to_lang'></h5>
+                <h5 style="font-size: medium;">Text position : <span id = 'text_position'></h5>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -2,7 +2,7 @@ import os
 from flask import Flask, flash, request, redirect, url_for, render_template, jsonify
 from werkzeug.utils import secure_filename
 from flask import send_from_directory
-import importpythonmodule
+from rt_atrt_lib import RT_ATRT
 
 UPLOAD_FOLDER = 'static/uploadedvideo'
 # UPLOAD_FOLDER = os.path.dirname('./uploadedvideo')
@@ -29,14 +29,14 @@ def vdo_info_handle():
 #     tranlang = request.json['to']
 #     return jsonify(result=...)
 
-@app.route('/videofromupload', methods=['GET', 'POST'])     
+@app.route('/upload_vdo', methods=['GET', 'POST'])     
 def upload_file():
     global file_name
     global inputlang
     file_name = 'None'
     # inputlang = ''
 
-    text = importpythonmodule.displaytext.generate_text()
+    # text = importpythonmodule.displaytext.generate_text()
     # if request.method == "GET":
     #     autodetect = 'autodetect'
     #     return redirect(request.url)
@@ -57,13 +57,28 @@ def upload_file():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             file_name = file.filename
+            # inputlang = request.files['inputlang']
+            # print(inputlang)
+            # video, position, language, translanguage, output_path
+            # rt_atrt = RT_ATRT("uploadedvideo/"+file_name, "above", )
             # return redirect(url_for('uploaded_file', filename=filename))
-    return render_template('upload.html', processed_video = url_for('static', filename="uploadedvideo/"+file_name)
-                            , echo_text = text)
-
+            return redirect('/vdo_uploaded')
+    return render_template('upload.html', processed_video = url_for('static', filename="uploadedvideo/"+file_name))
+    # return render_template('base.html')
+    # , echo_text = text
+    
 # @app.route('/videofromlink', methods=['GET', 'POST'])
 # def home():
 #     return render_template("link.html")
+
+@app.route('/vdo_uploaded', methods=['GET', 'POST'])     
+def set_process_param():
+    global file_name
+    if request.method == 'POST':
+        r = request.form['text_position']
+        print(r)
+        return render_template('progress_bar.html', processed_video = url_for('static', filename="uploadedvideo/"+file_name))
+    return render_template('render_vdo.html', processed_video = url_for('static', filename="uploadedvideo/"+file_name))
 
 if __name__=="__main__":
     app.run(host='localhost', port=5000, debug=True)
