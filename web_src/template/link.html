@@ -1,0 +1,251 @@
+{% extends "base.html" %}
+{% block content %}
+<!doctype html>
+
+<body>
+    <script>
+        var chinese_value = false;
+        var german_value = false;
+        var english_value = false;
+        var french_value = false;
+        var italian_value = false;
+        var japanese_value = false;
+        var korean_value = false;
+        var spanish_value = false;
+        var thai_value = false;
+        var tranlang = false;
+    </script>
+        <!-- <div class="container" style="margin: 0px; margin-right: 0px; padding: 0px; height: auto; width: auto;"> -->
+        <div className="row" style="height: 310px; width: auto; margin-bottom: 0.8rem;" > 
+
+            <div class="col-sm-4 float-left" style="margin: 0px;  height: 84px; "> 
+                <div class="col-3 float-left" style="margin: 0; padding: 0px; margin-right: 0; margin-bottom: 2rem; height: 100%;">
+                    <img src="{{url_for('static', filename='Picture1.png')}}" width="80" height="80" alt="avatar" style="align-items: center; margin: 0px; padding: 0px;  height: 100%;">
+                </div>
+                <div class="col-9 float-right" style="margin: 0; padding: 0px; margin-right: 0">
+                    <div class="card" style="width: 20rem; margin-bottom: 2rem; margin-left: 0; background-color: honeydew; border-radius: 20px;" >
+                        <div class="card-body" style="padding: 2%; ">
+                            <p style="margin: 0%; padding-left: 0%; ">HI! </br>let's import your video or YouTube URL </br>then choose the languages.</p>
+                        </div>
+                    </div>
+                </div>
+                <a class="btn btn-primary btn-lg" href="/upload_vdo" role="button" style="margin-bottom: 3%; padding: 1%; font-size: 1rem; margin-right: 2%;">Upload video</a>
+                <a class="btn btn-primary btn-lg" href="/url_vdo" role="button" style="margin-bottom: 3%; padding: 1%; font-size: 1rem;">Youtube link</a>
+                <!-- <form method=post enctype=multipart/form-data >
+                    <input type=file name=file>
+                    <button  type="submit" class="btn btn-success"  style=" font-size: 1rem; padding: 1.4%;" id='button_upload' >Upload</button>
+                </form> -->
+                <form >
+                    <input type="url" id="yt_url" name="yt_url" style="width:70%;">
+                    <input type="submit">
+                </form>
+            <form method=post enctype=multipart/form-data >
+                <div class="card text-center" style="width: 100%; background-color: white; border-radius: 20px; margin-top: 4%; border: 0.5px solid rgba(0, 0, 0, 0.3);" >
+                    <div class="card-body" style="padding: 3%; ">
+                        <h5 style="margin-bottom: 30%px;">Choose the text position</h5>
+                        <div class="col-sm-4 float-left" style="padding-right: 0%; padding-left: 0%;">
+                            <input type="radio" id="text_position1" name="text_position" value="Above Text" checked> Above Text
+                        </div>
+                        <div class="col-sm-4 float-left" style="padding-right: 0%; padding-left: 0%;">
+                            <input type="radio" id="text_position2" name="text_position" value="Under Text" > Under Text 
+                        </div>
+                        <div class="col-sm-4 float-left" style="padding-right: 0%; padding-left: 0%;">
+                            <input type="radio" id="text_position3" name="text_position" value="At Text Position">Text Position 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2 float-right" style="margin: 0px; padding: 0px;  height: 100%;">
+                <div class="card text-center" style="height: 48%; border-radius: 1rem; border: 0.5px solid rgba(0, 0, 0, 0.3);">
+                    <div class="card-body">
+                        <h5 style="margin-bottom: 0%;">Process</br>the video</h5>
+                            <div class="col align-self-center" style="padding: 0%; align-items: center; margin-top: 7%;" id='button_submit' type='button' >
+                                <button id="submitBtn" type="submit" class="btn btn-success btn-lg monitored-btn" onclick="submit()" disabled>Submit</button>
+                            </div>                   
+                    </div>
+                </div>
+                <div class="card text-center" style="height: 48%; margin-top: 4%; border-radius: 1rem; border: 0.5px solid rgba(0, 0, 0, 0.3);">
+                    <div class="card-body">
+                        <h5 style="margin-bottom: 0%;">Reset</br>the process</h5>
+                        <div class="col align-self-center" style="padding: 0%; align-items: center; margin-top: 7%;" id='button_submit' type='button' >
+                            <a href="/url_vdo">
+                                <button id="resetBtn" class="btn btn-danger btn-lg monitored-btn" >Reset</button>
+                             </a>
+                        </div>                    
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="col-sm-4 float-left" style="margin: 0px; padding-right: 1%;  height: 100%; ">
+                <div class="card text-center" style="height: 100%; border-radius: 1rem; border: 0.5px solid rgba(0, 0, 0, 0.3);" >
+                    <div class="card-body" style="height: 100%;">
+                        <h5 style="margin-bottom: 30%px;">Choose the text languages</h5>
+
+                        <div class="row justify-content-center" style="padding-bottom: 2%; margin-bottom: 2%; margin-top: 5%;">
+                            <div data-toggle="buttons" class="btn-group bizmoduleselect" id='button_autodetect' type='button' onchange="autodetect()">
+                                <label class="btn btn-outline-info" style="border-radius: 0.4rem; padding: 0px;  margin-bottom: 0px;">
+                                <p style="margin: 5px; width: 120px;">Auto Detect</p>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="row" style="padding-bottom: 2%; height: 18%; margin-bottom: 2%;">
+                            <div class="items col-sm-4 d-flex justify-content-center" style="padding-right: 4%; padding-left: 3%;" >
+                                <div data-toggle="buttons" class="btn-group bizmoduleselect" style="width: 100%;" id='button_chinese' type='button' onclick="chinese()">
+                                    <script>
+                                        function chinese(){
+                                            chinese_value = !chinese_value
+                                            // console.log(chinese_value)
+                                        }
+                                    </script>
+                                    <label class="btn btn-outline-info" style="border-radius: 2.4rem; padding: 0px;  margin-bottom: 0px;">
+                                    <p style="margin: 0%; width: 100%;">Chinese</p>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="items col-sm-4 d-flex justify-content-center " style="padding-right: 4%; padding-left: 3%;" >
+                                <div data-toggle="buttons" class="btn-group bizmoduleselect " style="width: 100%;" id='button_german' onclick="german() ">
+                                    <script>
+                                        function german(){
+                                            german_value = !german_value
+                                            // console.log(german_value)
+                                        }
+                                    </script>
+                                    <label class="btn btn-outline-info" style="border-radius: 2.4rem; padding: 0px;  margin-bottom: 0px;">
+                                    <p style="margin: 0%; width: 100%;">German</p>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="items col-sm-4 d-flex justify-content-center" style="padding-right: 4%; padding-left: 3%;" >
+                                <div data-toggle="buttons" class="btn-group bizmoduleselect" style="width: 100%;" id='button_english' type='button' onclick="english()">
+                                    <script>
+                                        console.log(document.getElementById("button_english").toggleAttribute)
+                                        function english(){
+                                            english_value = !english_value
+                                            // console.log(english_value)
+                                        }
+                                    </script>
+                                    <label class="btn btn-outline-info" style="border-radius: 2.4rem; padding: 0px;  margin-bottom: 0px;">
+                                        <p style="margin: 0%; width: 100%;">English</p>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" style="padding-bottom: 2%; height: 18%; margin-bottom: 2%;">
+                            <div class="items col-sm-4 d-flex justify-content-center" style="padding-right: 4%; padding-left: 3%;" >
+                                <div data-toggle="buttons" class="btn-group bizmoduleselect" style="width: 100%;" id='button_french' type='button' onclick="french()" >
+                                    <script>
+                                        function french(){
+                                            french_value = !french_value
+                                            // console.log(french_value)
+                                        }
+                                    </script>
+                                    <label class="btn btn-outline-info" style="border-radius: 2.4rem; padding: 0px;  margin-bottom: 0px;">
+                                    <p style="margin: 0%; width: 100%;">French</p>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="items col-sm-4 d-flex justify-content-center" style="padding-right: 4%; padding-left: 3%;" >
+                                <div data-toggle="buttons" class="btn-group bizmoduleselect" style="width: 100%;" id='button_italian' type='button' onclick="italian()">
+                                    <script>
+                                        function italian(){
+                                            italian_value = !italian_value
+                                            // console.log(italian_value)
+                                        }
+                                    </script>
+                                    <label class="btn btn-outline-info" style="border-radius: 2.4rem; padding: 0px;  margin-bottom: 0px;">
+                                    <p style="margin: 0%; width: 100%;">Italian</p>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="items col-sm-4 d-flex justify-content-center" style="padding-right: 4%; padding-left: 3%;" >
+                                <div data-toggle="buttons" class="btn-group bizmoduleselect" style="width: 100%;" id='button_japanese' type='button' onclick="japanese()">
+                                    <script>
+                                        function japanese(){
+                                            japanese_value = !japanese_value
+                                            // console.log(japanese_value)
+                                        }
+                                    </script>
+                                    <label class="btn btn-outline-info" style="border-radius: 2.4rem; padding: 0px;  margin-bottom: 0px;">
+                                    <p style="margin: 0%; width: 100%;">Japanese</p>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" style="padding-bottom: 2%; height: 18%; margin-bottom: 2%;">
+                            <div class="items col-sm-4 d-flex justify-content-center" style="padding-right: 4%; padding-left: 3%;" >
+                                <div data-toggle="buttons" class="btn-group bizmoduleselect" style="width: 100%;" id='button_korean' type='button' onclick="korean()">
+                                    <script>
+                                        function korean(){
+                                            korean_value = !korean_value
+                                            // console.log(korean_value)
+                                        }
+                                    </script>
+                                    <label class="btn btn-outline-info" style="border-radius: 2.4rem; padding: 0px;  margin-bottom: 0px;">
+                                    <p style="margin: 0%; width: 100%;">Korean</p>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="items col-sm-4 d-flex justify-content-center" style="padding-right: 4%; padding-left: 3%;" >
+                                <div data-toggle="buttons" class="btn-group bizmoduleselect" style="width: 100%;" id='button_spanish' type='button' onclick="spanish()">
+                                    <script>
+                                        function spanish(){
+                                            spanish_value = !spanish_value
+                                            // console.log(spanish_value)
+                                        }
+                                    </script>
+                                    <label class="btn btn-outline-info" style="border-radius: 2.4rem; padding: 0px;  margin-bottom: 0px;">
+                                    <p style="margin: 0%; width: 100%;">Spanish</p>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="items col-sm-4 d-flex justify-content-center" style="padding-right: 4%; padding-left: 3%;" >
+                                <div data-toggle="buttons" class="btn-group bizmoduleselect" style="width: 100%;" id='button_thai' type='button' onclick="thai()">
+                                    <script>
+                                        function thai(){
+                                            thai_value = !thai_value
+                                            // console.log(thai_value)
+                                        }
+                                    </script>
+                                    <label class="btn btn-outline-info" style="border-radius: 2.4rem; padding: 0px;  margin-bottom: 0px;">
+                                    <p style="margin: 0%; width: 100%;">Thai</p>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+
+            <div class="col-sm-2 float-right" style="margin: 0px; padding: 0px;  height: 100%; padding-right: 1%;">
+                <div class="card text-center" style="height: 100%; border-radius: 1rem; border: 0.5px solid rgba(0, 0, 0, 0.3);">
+                    <div class="card-body">
+                        <h5 style="margin-bottom: 32px;">Translation language</h5>
+                            <div class="btn-group-vertical ">
+                                <button type="button" class="btn btn-outline-success" name="translang" style="margin-bottom: 18px;" id='button_tran_thai' onclick="tran_to_thai()">Thai</button>
+                                <p class="text-center" style="margin-bottom: 18px; padding-left: 28px;">or</p>
+                                <button type="button" class="btn btn-outline-success" name="translang" id='button_tran_english' onclick="tran_to_english()">English</button> 
+                                <script>
+                                    function tran_to_thai(){
+                                        tranlang = 'Thai'
+                                    }
+                                    function tran_to_english(){
+                                        tranlang = 'English'
+                                    }
+                                </script>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        </div>
+        {% block vdo_render %}
+        {% endblock %}
+
+    <script type="text/javascript" src="submit_video.js"></script>
+</body>
+{% endblock %}

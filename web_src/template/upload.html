@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <!doctype html>
+
 <body>
     <script>
         var chinese_value = false;
@@ -17,20 +18,25 @@
         <!-- <div class="container" style="margin: 0px; margin-right: 0px; padding: 0px; height: auto; width: auto;"> -->
         <div className="row" style="height: 310px; width: auto; margin-bottom: 0.8rem;" > 
 
-            <div class="col-sm-4 float-left" style="margin: 0px; padding: 0px;  height: 100%; "> 
-                <div class="card" style="width: 20rem; margin-bottom: 2rem; margin-left: 8rem; background-color: honeydew; border-radius: 20px;" >
-                    <div class="card-body" style="padding: 2%; ">
-                        <p style="margin: 0%; padding-left: 5%; ">HI! </br>let's import your video or Youtube link </br>then choose the languages.</p>
+            <div class="col-sm-4 float-left" style="margin: 0px;  height: 84px; "> 
+                <div class="col-3 float-left" style="margin: 0; padding: 0px; margin-right: 0; margin-bottom: 2rem; height: 100%;">
+                    <img src="{{url_for('static', filename='Picture1.png')}}" width="80" height="80" alt="avatar" style="align-items: center; margin: 0px; padding: 0px;  height: 100%;">
+                </div>
+                <div class="col-9 float-right" style="margin: 0; padding: 0px; margin-right: 0">
+                    <div class="card" style="width: 20rem; margin-bottom: 2rem; margin-left: 0; background-color: honeydew; border-radius: 20px;" >
+                        <div class="card-body" style="padding: 2%; ">
+                            <p style="margin: 0%; padding-left: 0%; ">HI! </br>let's import your video or YouTube URL </br>then choose the languages.</p>
+                        </div>
                     </div>
                 </div>
-                <a class="btn btn-primary btn-lg" href="#" role="button" style="margin-bottom: 3%; padding: 1%; font-size: 1rem; margin-right: 2%;">Upload video</a>
-                <a class="btn btn-primary btn-lg" href="#" role="button" style="margin-bottom: 3%; padding: 1%; font-size: 1rem;">Youtube link</a>
+                <a class="btn btn-primary btn-lg" href="/upload_vdo" role="button" style="margin-bottom: 3%; padding: 1%; font-size: 1rem; margin-right: 2%;">Upload video</a>
+                <a class="btn btn-primary btn-lg" href="/url_vdo" role="button" style="margin-bottom: 3%; padding: 1%; font-size: 1rem;">Youtube link</a>
                 <form method=post enctype=multipart/form-data >
                     <input type=file name=file>
                     <button  type="submit" class="btn btn-success"  style=" font-size: 1rem; padding: 1.4%;" id='button_upload' >Upload</button>
                 </form>
-            <form method=post enctype=multipart/form-data>
-                <div class="card text-center" style="width: 100%; background-color: white; border-radius: 20px; margin-top: 2%; border: 0.5px solid rgba(0, 0, 0, 0.3);" >
+            <form method=post enctype=multipart/form-data >
+                <div class="card text-center" style="width: 100%; background-color: white; border-radius: 20px; margin-top: 4%; border: 0.5px solid rgba(0, 0, 0, 0.3);" >
                     <div class="card-body" style="padding: 3%; ">
                         <h5 style="margin-bottom: 30%px;">Choose the text position</h5>
                         <div class="col-sm-4 float-left" style="padding-right: 0%; padding-left: 0%;">
@@ -42,9 +48,6 @@
                         <div class="col-sm-4 float-left" style="padding-right: 0%; padding-left: 0%;">
                             <input type="radio" id="text_position3" name="text_position" value="At Text Position">Text Position 
                         </div>
-                        <!-- <script>
-                            console.log()
-                        </script> -->
                     </div>
                 </div>
             </div>
@@ -113,6 +116,7 @@
                             <div class="items col-sm-4 d-flex justify-content-center" style="padding-right: 4%; padding-left: 3%;" >
                                 <div data-toggle="buttons" class="btn-group bizmoduleselect" style="width: 100%;" id='button_english' type='button' onclick="english()">
                                     <script>
+                                        console.log(document.getElementById("button_english").toggleAttribute)
                                         function english(){
                                             english_value = !english_value
                                             // console.log(english_value)
@@ -218,9 +222,9 @@
                     <div class="card-body">
                         <h5 style="margin-bottom: 32px;">Translation language</h5>
                             <div class="btn-group-vertical ">
-                                <button type="button" class="btn btn-outline-success" style="margin-bottom: 18px;" id='button_tran_thai' onclick="tran_to_thai()">Thai</button>
+                                <button type="button" class="btn btn-outline-success" name="translang" style="margin-bottom: 18px;" id='button_tran_thai' onclick="tran_to_thai()">Thai</button>
                                 <p class="text-center" style="margin-bottom: 18px; padding-left: 28px;">or</p>
-                                <button type="button" class="btn btn-outline-success" id='button_tran_english' onclick="tran_to_english()">English</button> 
+                                <button type="button" class="btn btn-outline-success" name="translang" id='button_tran_english' onclick="tran_to_english()">English</button> 
                                 <script>
                                     function tran_to_thai(){
                                         tranlang = 'Thai'

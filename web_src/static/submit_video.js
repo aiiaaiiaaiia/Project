@@ -47,12 +47,18 @@ function submit(){
     if(inputlang == ''){
         inputlang = 'Auto detect the language (Default)'
     }
-    if(tranlang == false){
-        tranlang = 'English (Default)'
+    if(tranlang == false){ //(Default)
+        tranlang = 'English'
     }
     console.log(inputlang)
     document.getElementById("from_lang").innerHTML = inputlang;
     document.getElementById("tran_to_lang").innerHTML = tranlang;
+
+    $.post( "/vdo_uploaded", {
+        js_inputlang: inputlang,
+        js_tranlang: tranlang
+    });
+
     document.getElementById("button_autodetect").disabled = true;
     document.getElementById("button_chinese").disabled = true;
     document.getElementById("button_german").disabled = true;

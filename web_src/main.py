@@ -18,6 +18,7 @@ def allowed_file(filename):
 @app.route('/vdo_info',methods = ['GET'])
 def vdo_info_handle():
     global file_name
+
     res = {'file_name': file_name}
     return jsonify(res)
 
@@ -57,28 +58,67 @@ def upload_file():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             file_name = file.filename
-            # inputlang = request.files['inputlang']
-            # print(inputlang)
-            # video, position, language, translanguage, output_path
-            # rt_atrt = RT_ATRT("uploadedvideo/"+file_name, "above", )
+            
             # return redirect(url_for('uploaded_file', filename=filename))
             return redirect('/vdo_uploaded')
     return render_template('upload.html', processed_video = url_for('static', filename="uploadedvideo/"+file_name))
     # return render_template('base.html')
     # , echo_text = text
     
-# @app.route('/videofromlink', methods=['GET', 'POST'])
-# def home():
-#     return render_template("link.html")
-
 @app.route('/vdo_uploaded', methods=['GET', 'POST'])     
 def set_process_param():
     global file_name
+    
     if request.method == 'POST':
-        r = request.form['text_position']
-        print(r)
-        return render_template('progress_bar.html', processed_video = url_for('static', filename="uploadedvideo/"+file_name))
+        # variable
+        position = request.form['text_position']
+        # inputlang = request.form['inputlang']
+        # print(inputlang)
+        # video = "uploadedvideo/"+file_name
+        return render_template('upload.html', processed_video = url_for('static', filename="uploadedvideo/"+file_name))
+        # return render_template('progress_bar.html', processed_video = url_for('static', filename="uploadedvideo/"+file_name))
+        # rt_atrt = RT_ATRT(video, position, language, translanguage, output_path)
+        # path_of_output = rt_atrt.output_from_process()
+        return render_template('render_vdo.html', processed_video = url_for('static', filename="path_of_output"))
     return render_template('render_vdo.html', processed_video = url_for('static', filename="uploadedvideo/"+file_name))
+
+@app.route('/url_vdo', methods=['GET', 'POST'])
+def process_url():
+    global file_name
+    global inputlang
+    file_name = 'None'
+    url = ''
+
+    if request.method == 'POST':
+        # variable
+        url = request.input['yt_url']
+        print(url)
+    # text = importpythonmodule.displaytext.generate_text()
+    # if request.method == "GET":
+    #     autodetect = 'autodetect'
+    #     return redirect(request.url)
+    # if request.method == 'POST':
+    #     # check if the post request has the file part
+    #     if 'file' not in request.files:
+    #         # flash('No file part')
+    #         pass
+    #         return redirect(request.url)
+    #     file = request.files['file']
+    #     # if user does not select file, browser also
+    #     # submit an empty part without filename
+    #     if file.filename == '':
+    #         # flash('No selected file')
+    #         pass
+    #         return redirect(request.url)
+    #     if file and allowed_file(file.filename):
+    #         filename = secure_filename(file.filename)
+    #         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    #         file_name = file.filename
+            
+    #         # return redirect(url_for('uploaded_file', filename=filename))
+    #         return redirect('/vdo_uploaded')
+    return render_template('link.html')
+
 
 if __name__=="__main__":
     app.run(host='localhost', port=5000, debug=True)
