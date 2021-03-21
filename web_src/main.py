@@ -72,7 +72,7 @@ def set_process_param():
         video = "static/uploadedvideo/"+ vdo_name + ".mp4"
         position = []
         language = []
-        trans_language = []
+        trans_language = ''
         output_path = "static/process_output/"
         vdo_output = output_path + "processed_" + vdo_name + ".mp4"
         
@@ -81,9 +81,9 @@ def set_process_param():
             if element in ['english','chinese','french','thai','italian','japanese','korean','german','spanish','auto detect']:
                 language.append(element)
             elif element in ['trans_thai']:
-                trans_language.append('thai')
+                trans_language = 'thai'
             elif element in ['trans_eng']:
-                trans_language.append('english')
+                trans_language = 'english'
         
         position = dict_form['text_position'][0]
         
