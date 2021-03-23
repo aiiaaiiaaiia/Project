@@ -56,7 +56,8 @@
                     <div class="card-body">
                         <h5 style="margin-bottom: 0%;">Process</br>the video</h5>
                             <div class="col align-self-center" style="padding: 0%; align-items: center; margin-top: 7%;" id='button_submit'>
-                                <button id="submitBtn" class="btn btn-success btn-lg monitored-btn" disabled>Submit</button>
+                                <button id="submitBtn" class="btn btn-success btn-lg monitored-btn" >Submit</button>  
+                                <!-- disabled -->
                             </div>                   
                     </div>
                 </div>
@@ -185,9 +186,10 @@
             </div>
         </form>
         </div>
+        <script type="text/javascript" src="submit_video.js"></script>
+
         {% block vdo_render %}
         {% endblock %}
 
-    <script type="text/javascript" src="submit_video.js"></script>
 </body>
 {% endblock %}

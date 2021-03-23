@@ -21,8 +21,11 @@ def allowed_file(filename):
 @app.route('/vdo_info',methods = ['GET'])
 def vdo_info_handle():
     global title
+    global position
+    global language
+    global trans_language
 
-    res = {'title': title}
+    res = {'title': title , 'position': position, 'language':language, 'trans_language': trans_language}
     return jsonify(res)
 
 @app.route('/upload_vdo', methods=['GET', 'POST'])     
@@ -30,8 +33,15 @@ def upload_file():
     global file_name
     global title
     global inputlang
-    file_name = 'None'
+    global position
+    global language
+    global trans_language
     # inputlang = ''
+    title = ''
+    file_name = 'None'
+    position = ''
+    language = []
+    trans_language = ''
 
     # text = importpythonmodule.displaytext.generate_text()
     # if request.method == "GET":
@@ -63,6 +73,9 @@ def set_process_param():
     global output_path
     global vdo_name
     global vdo_output
+    global position
+    global language
+    global trans_language
     if request.method == 'POST':
         # variable
         print("get pose from JS")
@@ -70,7 +83,7 @@ def set_process_param():
         dict_form = request.form.to_dict(flat=False)
         vdo_name = file_name.split('.')[0]
         video = "static/uploadedvideo/"+ vdo_name + ".mp4"
-        position = []
+        position = ''
         language = []
         trans_language = ''
         output_path = "static/process_output/"
@@ -95,7 +108,7 @@ def set_process_param():
                 
         ## Process Here
         # test_python.run_process(1,output_path)
-        rt_atrt_process = RT_ATRT(video, position, language, trans_language, output_path)
+        rt_atrt_process = RT_ATRT(video, position, language, trans_language, output_path, frame_similarity_threshold = 0.99)
         run_thread = threading.Thread(target=rt_atrt_process.run_process, name="rt_atrt_process", args=[])
         run_thread.start()
         ##
@@ -109,8 +122,8 @@ def set_process_param():
 def finish_process():
     global output_path
     global vdo_name
-    return render_template('render_vdo.html', processed_video = url_for('static', filename = output_path + "processed_" + vdo_name + ".mp4"), 
-                            processed_text = url_for('static', filename = output_path + vdo_name + "_text.txt"))
+    return render_template('render_vdo.html', processed_video = url_for('static', filename = "process_output/" + "processed_" + vdo_name + ".mp4"), 
+                            processed_text = url_for('static', filename = "process_output/" + vdo_name + "_text.txt"))
 
 @app.route('/url_vdo', methods=['GET', 'POST'])
 def process_url():
